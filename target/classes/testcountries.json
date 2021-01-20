@@ -1,0 +1,36 @@
+ {
+  "All": {
+    "confirmed": 2604595,
+    "recovered": 195365,
+    "deaths": 62548,
+    "country": "France",
+    "population": 64979548,
+    "sq_km_area": 551500,
+    "life_expectancy": "78.8",
+    "elevation_in_meters": 375,
+    "continent": "Europe",
+    "abbreviation": "FR",
+    "location": "Western Europe",
+    "iso": 250,
+    "capital_city": "Paris",
+    "lat": "46.2276",
+    "long": "2.2137",
+    "updated": "2020/12/26 12:21:56+00"
+  },
+  "French Guiana": {
+    "lat": "4",
+    "long": "-53",
+    "confirmed": 12685,
+    "recovered": 9995,
+    "deaths": 71,
+    "updated": "2020/12/26 12:21:56+00"
+  },
+  "TestArea": {
+    "lat": "6",
+    "long": "-43",
+    "confirmed": 1,
+    "recovered": 9,
+    "deaths": 7,
+    "updated": "2020/12/26 12:21:56+00"
+  }
+}

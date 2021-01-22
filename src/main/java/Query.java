@@ -88,13 +88,13 @@ public class Query
     {
         try
         {
-            try (PreparedStatement ps = conn.prepareStatement("SELECT name, confirmed, recovered, deaths FROM countries"))
+            try (PreparedStatement ps = conn.prepareStatement("SELECT name, confirmed, recovered, deaths ,updated FROM countries"))
             {
                 try (ResultSet rs = ps.executeQuery())
                 {
                     while (rs.next())
                     {
-                        System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3) + " " + rs.getInt(4));
+                        System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3) + " " + rs.getInt(4) + " " + rs.getObject(5));
                     }
                 }
             }
@@ -108,14 +108,14 @@ public class Query
     {
         try
         {
-            try (PreparedStatement ps = conn.prepareStatement("SELECT name, confirmed, recovered, deaths FROM areas WHERE country=?"))
+            try (PreparedStatement ps = conn.prepareStatement("SELECT name, confirmed, recovered, deaths, updated FROM areas WHERE country=?"))
             {
                 ps.setObject(1, co);
                 try (ResultSet rs = ps.executeQuery())
                 {
                     while (rs.next())
                     {
-                        System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3) + " " + rs.getInt(4));
+                        System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3) + " " + rs.getInt(4) + " " + rs.getObject(5));
                     }
                 }
             }
@@ -129,14 +129,14 @@ public class Query
     {
         try
         {
-            try (PreparedStatement ps = conn.prepareStatement("SELECT name, confirmed, recovered, deaths FROM areas WHERE name=?"))
+            try (PreparedStatement ps = conn.prepareStatement("SELECT name, confirmed, recovered, deaths ,updated FROM areas WHERE name=?"))
             {
                 ps.setObject(1, na);
                 try (ResultSet rs = ps.executeQuery())
                 {
                     while (rs.next())
                     {
-                        System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3) + " " + rs.getInt(4));
+                        System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3) + " " + rs.getInt(4) + " " + rs.getObject(5));
                     }
                 }
             }
@@ -150,14 +150,14 @@ public class Query
     {
         try
         {
-            try (PreparedStatement ps = conn.prepareStatement("SELECT name, confirmed, recovered, deaths FROM countries WHERE name=?"))
+            try (PreparedStatement ps = conn.prepareStatement("SELECT name, confirmed, recovered, deaths, updated FROM countries WHERE name=?"))
             {
                 ps.setObject(1, name);
                 try (ResultSet rs = ps.executeQuery())
                 {
                     if (rs.next())
                     {
-                        System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3) + " " + rs.getInt(4));
+                        System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3) + " " + rs.getInt(4) + " " + rs.getObject(5));
                     } else
                     {
                         System.out.println("ERROR:NOT EXISTED.");

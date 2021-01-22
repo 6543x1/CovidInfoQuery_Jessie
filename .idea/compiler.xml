@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="CovidInfo_Jessie" target="8" />
+      <module name="CovidInfo_Jessie" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

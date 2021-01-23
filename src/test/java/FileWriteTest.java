@@ -10,6 +10,7 @@ public class FileWriteTest
 {
     public static void main(String[] args)
     {
+        //手写缓存，后来发现其实用不上，就扔测试类里了
         String q_URL = "https://covid-api.mmediagroup.fr/v1/cases?country=";
         String[] nations = {"China", "US", "United%20Kingdom", "Japan"};
         String path3 = Temporary.class.getClassLoader().getResource("Four.json").getPath();

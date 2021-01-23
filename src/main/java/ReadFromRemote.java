@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
 
 public class ReadFromRemote
 {
-    //咳咳这个代码也是现成学（借）来（鉴）的，只是用来读取内容足够，http的还在研究
+    //咳咳这个代码也是现成学（借）来（鉴）的，感觉比http写起来更简洁？
     public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException
     {
         try (InputStream is = new URL(url).openStream())

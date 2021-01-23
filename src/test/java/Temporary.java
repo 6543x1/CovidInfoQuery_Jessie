@@ -77,7 +77,6 @@ public class Temporary
         {
             System.out.println(entry.getKey() + ";" + ((JSONObject) entry.getValue()).getJSONObject("All").get("confirmed") + ";");
 
-
         }
         for (Map.Entry<String, Object> entry : json2.getJSONObject("China").entrySet())
         {

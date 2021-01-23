@@ -25,10 +25,12 @@ public class CovidQuery
         System.out.println("输入4退出程序");
 
         Query myQuery = new Query();
+        HttpComponents http = new HttpComponents();
         //myQuery.TestDATETIME();
         int command;
         while (true)
         {
+            System.out.println("请输入指令");
             try
             {
                 command = in.nextInt();
@@ -39,43 +41,35 @@ public class CovidQuery
             }
             if (command == 1)
             {
-                try
-                {
                     for (int i = 0; i < 4; i++)
                     {
                         try
                         {
-                            JSONObject json = ReadFromRemote.readJsonFromUrl(q_URL + nations[i]);
+                            JSONObject json = http.getFromUrl(q_URL + nations[i]);
                             String name = json.getJSONObject("All").getString("country");
                             int confirmed = json.getJSONObject("All").getInteger("confirmed");
                             int recovered = json.getJSONObject("All").getInteger("recovered");
                             int deaths = json.getJSONObject("All").getInteger("deaths");
                             myQuery.insertCountry(name, confirmed, recovered, deaths);
+                            System.out.println("获得数据： " + name + " " + confirmed + " " + recovered + " " + deaths);
                             System.out.println("成功更新国家：" + name);
-                            //原本还去判断是否已经存在本数据，因为主键设置的一个自增的id,没有规律
-                            //为了用REPLACE语句，主键就得改成别的
                             //为了偷懒，主键就直接设置为国家名字了，其实设置为iso代码或者abbr会更好，不过懒得管了233
                             if (nations[i] == "China")
                             {
-                                JSONObject json2 = ReadFromRemote.readJsonFromUrl(q_URL + "Taiwan*");
+                                JSONObject json2 = http.getFromUrl(q_URL + "Taiwan*");
                                 json.put("Taiwan", json2.getJSONObject("All"));
                                 //原数据源中China下不包括这个地方，Taiwan是一个另外的area
                                 //为什么是area呢，因为Taiwan这个属性下没有country，和省啊州啊是一样的
-                                //除非开发者有自己特别的主见，否则多少都要有点嗅觉，避免出现这种政治错误
-                                //其实还有很多国家有争议地区，因此也要做特别的处理，不过本程序不涉及就懒得写了
+                                //其实还有很多国家有争议地区，因此也要做特别的处理，不过本程序不涉及就是了
                             }
                             myQuery.insertAreas(json);
                             System.out.println("成功更新当前国家下的全部地区");
                         } catch (Exception e)
                         {
                             e.printStackTrace();
-                            System.out.println("更新失败，请重试。");
+                            System.out.println("更新" + nations[i] + "数据时失败，请重试。");
                         }
                     }
-                } catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
             } else if (command == 4)
             {
                 System.out.println("Bye");
@@ -94,7 +88,7 @@ public class CovidQuery
             {
                 String country = in.next();
                 String areas = in.next();
-                //北京在China下的首都里是Peking，后面又变成Beijing......
+                //北京在China下的首都里是Peking，后面又变成Beijing,就说查不到数据......
                 if (areas.equals("All"))
                 {
                     myQuery.PrintAllAreas(country);

@@ -160,7 +160,7 @@ public class Query
                         System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3) + " " + rs.getInt(4) + " " + rs.getObject(5));
                     } else
                     {
-                        System.out.println("ERROR:NOT EXISTED.");
+                        System.out.println("国家不存在或未录入数据库中");
                     }
                 }
             }

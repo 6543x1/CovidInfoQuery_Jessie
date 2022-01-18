@@ -54,7 +54,7 @@ public class CovidQuery
                             System.out.println("获得数据： " + name + " " + confirmed + " " + recovered + " " + deaths);
                             System.out.println("成功更新国家：" + name);
                             //为了偷懒，主键就直接设置为国家名字了，其实设置为iso代码或者abbr会更好，不过懒得管了233
-                            if (nations[i] == "China")
+                            if (nations[i].equals("China"))
                             {
                                 JSONObject json2 = http.getFromUrl(q_URL + "Taiwan*");
                                 json.put("Taiwan", json2.getJSONObject("All"));
@@ -77,7 +77,7 @@ public class CovidQuery
             } else if (command == 2)
             {
                 String country = in.next();
-                if (country.equals("All"))
+                if ("All".equals(country))
                 {
                     myQuery.PrintAllNation();
                 } else
@@ -89,7 +89,7 @@ public class CovidQuery
                 String country = in.next();
                 String areas = in.next();
                 //北京在China下的首都里是Peking，后面又变成Beijing,就说查不到数据......
-                if (areas.equals("All"))
+                if ("All".equals(areas))
                 {
                     myQuery.PrintAllAreas(country);
                 } else

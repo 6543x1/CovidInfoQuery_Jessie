@@ -1,6 +1,7 @@
 import com.alibaba.fastjson.JSONObject;
 
 import java.sql.*;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +20,7 @@ public class Query
         try
         {
             conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+            
         } catch (SQLException throwable)
         {
             throwable.printStackTrace();
@@ -76,6 +78,7 @@ public class Query
                     ps.setObject(5, deaths);
                     ps.setObject(6, date);
                     ps.executeUpdate();
+
                 }
             } catch (SQLException e)
             {
@@ -127,6 +130,15 @@ public class Query
 
     public void PrintAnArea(String na)
     {
+
+
+
+
+
+
+
+
+
         try
         {
             try (PreparedStatement ps = conn.prepareStatement("SELECT name, confirmed, recovered, deaths ,updated FROM areas WHERE name=?"))
@@ -158,6 +170,9 @@ public class Query
                     if (rs.next())
                     {
                         System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3) + " " + rs.getInt(4) + " " + rs.getObject(5));
+                        LocalDateTime localDateTime = rs.getTimestamp(5).toLocalDateTime();
+                        LocalDate.from(localDateTime);
+                        rs.getTimestamp(5);
                     } else
                     {
                         System.out.println("国家不存在或未录入数据库中");
